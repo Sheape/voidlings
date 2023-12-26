@@ -1,0 +1,23 @@
+# Template file for 'font-cartograph-nonfree'
+pkgname=font-cartograph-nonfree
+version=2.0
+revision=1
+_githash=2474e378858029c49669b441f9571f4b36fe0a94
+maintainer="Sheape <sheape@outlook.ph>"
+short_desc="Cartograph is a handsome font family featuring a lush, cursive
+italic, code-friendly ligatures, and a proportional set accessible via
+OpenType."
+# No license cuz the author made it proprietary
+license="Unlicensed"
+depends="font-util"
+font_dirs="/usr/share/fonts/OTF"
+homepage="https://ifonts.xyz/cartograph-font.html"
+distfiles="https://github.com/Sheape/cartograph-nonfree/archive/${_githash}.tar.gz"
+checksum=ae9b494640b5886ea96c0d317fa2a3343e4c466d9795b59551ba017e43bac580
+
+do_install() {
+    vmkdir usr/share/fonts/OTF
+    for font in ./fonts/otf/*.otf; do
+        vinstall "$font" 644 usr/share/fonts/OTF
+    done
+}
