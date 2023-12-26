@@ -1,0 +1,19 @@
+# Template file for 'anki-qt6'
+pkgname=anki-qt6
+version=2.1.65
+revision=1
+maintainer="Sheape <sheape@outlook.ph>"
+short_desc="Spaced repetition flashcard program - Qt 6"
+license="AGPL-3.0-or-later"
+depends="bash"
+hostdepends=" mpv"
+homepage="https://github.com/ankitects/anki"
+distfiles="https://github.com/ankitects/anki/releases/download/${version}/anki-
+${version}-linux-qt6.tar.zst https://raw.githubusercontent.com/ankitects/anki/${version}/LICENSE"
+checksum=241a96fda08c5324741f9d96318b9591c137fedfe3a0bc5fbc5868eb8233bc38
+
+do_install() {
+    ./install.sh
+
+    vlicense ../LICENSE
+}
