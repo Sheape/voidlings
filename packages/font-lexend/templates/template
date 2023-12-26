@@ -1,0 +1,22 @@
+# Template file for 'font-lexend'
+pkgname=font-lexend
+version=1.1
+revision=1
+_githash=0c8e2f933e024ce421925243370f82f5b1000a1e
+maintainer="Sheape <sheape@outlook.ph>"
+short_desc="Lexend is a variable typeface designed by Bonnie Shaver-Troup and
+Thomas Jockin in 2018"
+license="OFL-1.1"
+depends="font-util"
+font_dirs="/usr/share/fonts/TTF"
+homepage="https://github.com/googlefonts/lexend"
+distfiles="https://github.com/googlefonts/lexend/archive/${_githash}.tar.gz"
+checksum=a442dcca5e7894d95a1e05136879a4fd193df3b52bb32b1d0996503ea2ac0359
+
+do_install() {
+    vmkdir usr/share/fonts/TTF
+    for font in ./fonts/lexend/ttf/*.ttf; do
+        vinstall "$font" 644 usr/share/fonts/TTF
+    done
+    vlicense OFL.txt
+}
