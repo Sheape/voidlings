@@ -1,0 +1,22 @@
+# Template file for 'font-quicksand'
+pkgname=font-quicksand
+version=2.0
+revision=1
+_githash=6dbe1c07a99d0b63b730265f2ea75e10113e9a04
+maintainer="Sheape <sheape@outlook.ph>"
+short_desc="Quicksand is a sans serif typeface designed by Andrew Paglinawan in
+2008 using geometric shapes as it's core foundation."
+license="OFL-1.1"
+depends="font-util"
+font_dirs="/usr/share/fonts/TTF"
+homepage="https://github.com/andrew-paglinawan/QuicksandFamily"
+distfiles="https://github.com/andrew-paglinawan/QuicksandFamily/archive/${_githash}.tar.gz"
+checksum=0299c35e15e4f30acf4e272a05788f4748c0ed38d1083671b43797fb2552996e
+
+do_install() {
+    vmkdir usr/share/fonts/TTF
+    for font in ./fonts/statics/*.ttf; do
+        vinstall "$font" 644 usr/share/fonts/TTF
+    done
+    vlicense OFL.txt
+}
