@@ -1,0 +1,17 @@
+# Template file for 'bat-extras'
+pkgname=bat-extras
+version=2023.06.15
+revision=1
+maintainer="Sheape <sheape@outlook.ph>"
+short_desc="Bash scripts that integrate bat with various command line tools."
+license="MIT"
+depends="bat ripgrep"
+homepage="https://github.com/eth-p/bat-extras"
+distfiles="https://github.com/eth-p/bat-extras/archive/refs/tags/v${version}.zip"
+checksum=95e044ad0e0e54bd10afc5ea1a28bd3747f9c5d5feca2184f432b78d414e9ea8
+
+do_install() {
+    ./build.sh --install
+
+    vlicense LICENSE.md
+}
