@@ -1,0 +1,25 @@
+# Template file for 'qutebrowser-profile'
+pkgname=qutebrowser-profile
+version=2021.01.08
+_githash=6b7784a81c988b1b118e8ab7512f8f9a05cc13f2
+revision=1
+maintainer="Sheape <sheape@outlook.ph>"
+short_desc="A simple wrapper script for qutebrowser that allows you to maintain
+different profiles"
+license="MIT"
+depends="bash"
+hostdepends="qutebrowser"
+homepage="https://github.com/jtyers/qutebrowser-profile"
+distfiles="https://github.com/jtyers/qutebrowser-profile/archive/${_githash}.tar.gz"
+checksum=7e2383f9dde7fbd7f09628283218adb0d2dd8e8a31228d24b5d14d90284c3b4e
+
+do_install() {
+    vbin ${pkgname}
+
+    vlicense LICENSE
+}
+
+post_install() {
+    vmkdir usr/share/applications
+    vinstall ${pkgname}.desktop 644 usr/share/applications
+}
