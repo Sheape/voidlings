@@ -1,0 +1,21 @@
+# Template file for 'font-comfortaa'
+pkgname=font-comfortaa
+version=3.101
+revision=1
+_githash=969f9e563003fd12e578354963917735113816b1
+maintainer="Sheape <sheape@outlook.ph>"
+short_desc="Open-source font by Johan Aakerlund"
+license="OFL-1.1"
+depends="font-util"
+font_dirs="/usr/share/fonts/TTF"
+homepage="https://github.com/googlefonts/comfortaa"
+distfiles="https://github.com/googlefonts/comfortaa/archive/${_githash}.tar.gz"
+checksum=51d1f583c4ed97a7cd349b06fe085f08c7aa463550148f282436ced7e6ae2bed
+
+do_install() {
+    vmkdir usr/share/fonts/TTF
+    for font in ./fonts/TTF/*.ttf; do
+        vinstall "$font" 644 usr/share/fonts/TTF
+    done
+    vlicense OFL.txt
+}
