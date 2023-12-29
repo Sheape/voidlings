@@ -4,3 +4,9 @@
 [submodule "void-packages"]
 	path = void-packages
 	url = https://github.com/void-linux/void-packages.git
+[submodule "hyprland-void"]
+	path = hyprland-void
+	url = https://github.com/Makrennel/hyprland-void.git
+[submodule "eww-void"]
+	path = eww-void
+	url = https://github.com/Makrennel/eww-void.git

@@ -18,3 +18,18 @@ for xbps_pkg in $(ls -1 /workspace/packages); do
     # xlint ${xbps_pkg} || exit 1
     ./xbps-src pkg ${xbps_pkg} || exit 1
 done
+
+for xbps_pkg in $(cat /workspace/package-list); do
+    ./xbps-src pkg ${xbps_pkg} || exit 1
+done
+
+# Hyprland's shlibs
+cat /workspace/hyprland-void/common/shlibs >> /workspace/void-packages/common/shlibs
+mv /workspace/hyprland-void/srcpkgs/* /workspace/void-packages/srcpkgs/
+./xbps-src pkg hyprland || exit 1
+./xbps-src pkg hyprpaper || exit 1
+./xbps-src pkg xdg-desktop-portal-hyprland || exit 1
+
+# Eww
+mv /workspace/eww-void/srcpkgs/* /workspace/void-packages/srcpkgs/
+./xbps-src pkg eww || exit 1
