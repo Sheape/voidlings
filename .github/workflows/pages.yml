@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 env:
   GHCR_IMAGE: "ghcr.io/xdeb-org/voidlinux-repository"
