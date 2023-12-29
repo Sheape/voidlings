@@ -5,8 +5,7 @@ revision=1
 maintainer="Sheape <sheape@outlook.ph>"
 short_desc="Spaced repetition flashcard program - Qt 6"
 license="AGPL-3.0-or-later"
-depends="bash"
-makedepends="xdg-utils"
+makedepends="xdg-utils bash"
 hostdepends="mpv"
 build_style="meta"
 homepage="https://github.com/ankitects/anki"
@@ -15,6 +14,7 @@ checksum="31e5c1bed12f69cff7738c10ab89505707872400998bd51048114a3c9d0f9204"
 
 pre_install() {
     mkdir -p /tmp/.config
+    update-mime-database /usr/share/mime
 }
 
 do_install() {

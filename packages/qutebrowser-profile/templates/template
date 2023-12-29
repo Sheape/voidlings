@@ -7,8 +7,7 @@ maintainer="Sheape <sheape@outlook.ph>"
 short_desc="A simple wrapper script for qutebrowser that allows you to maintain
 different profiles"
 license="MIT"
-depends="bash"
-hostdepends="qutebrowser"
+hostdepends="bash qutebrowser"
 homepage="https://github.com/jtyers/qutebrowser-profile"
 distfiles="https://github.com/jtyers/qutebrowser-profile/archive/${_githash}.tar.gz"
 checksum=7e2383f9dde7fbd7f09628283218adb0d2dd8e8a31228d24b5d14d90284c3b4e
