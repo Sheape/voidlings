@@ -1,9 +1,6 @@
 name: GitHub Pages
 
 on:
-  schedule:
-    # each sunday at 4:00
-    - cron: "0 4 * * 0"
   push:
     branches:
       - main
@@ -20,10 +17,6 @@ jobs:
         config:
           - arch: x86_64
             platform: linux/amd64
-          - arch: i686
-            platform: linux/i386
-          - arch: aarch64
-            platform: linux/arm64
     permissions:
       contents: read
       packages: read
@@ -91,8 +84,6 @@ jobs:
         run: |
           mkdir -p repository
           mv repository-x86_64/* repository
-          mv repository-i686/* repository
-          mv repository-aarch64/* repository
 
       - name: Build apindex
         run: |

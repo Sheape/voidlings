@@ -1,0 +1,18 @@
+# Template file for 'bun'
+pkgname=bun-bin
+version=1.0.20
+revision=1
+build_style="meta"
+archs="aarch64 x86_64"
+short_desc="JavaScript runtime, bundler, transpiler, and package manager"
+maintainer="Sheape <sheape@outlook.ph>"
+license="MIT"
+homepage="https://bun.sh"
+changelog="https://bun.sh/blog"
+distfiles="https://github.com/oven-sh/bun/releases/download/bun-v${version}/bun-linux-x64.zip"
+checksum=3484829701660df971c74f605a0a360a9c7f417c68ab8883718b97513d454e7f
+
+do_install() {
+	vbin bun
+    ln -s /usr/bin/bun /usr/bin/bunx
+}
