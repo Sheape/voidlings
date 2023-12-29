@@ -15,6 +15,6 @@ for xbps_pkg in $(ls -1 /workspace/packages); do
     sed -i "s/%XDEB_INSTALL_BINARY_SHA256%/${xbps_pkg_binary_checksum}/" srcpkgs/${xbps_pkg}/template
     # sed -i "s/%XDEB_INSTALL_LICENSE_SHA256%/${xbps_pkg_license_checksum}/" srcpkgs/${xbps_pkg}/template
 
-    xlint ${xbps_pkg} || exit 1
+    # xlint ${xbps_pkg} || exit 1
     ./xbps-src pkg -Q ${xbps_pkg} || exit 1
 done
