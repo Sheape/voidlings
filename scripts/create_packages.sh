@@ -7,6 +7,9 @@ git config --global --add safe.directory /workspace/void-packages
 cd /workspace/void-packages
 ln -s / masterdir
 
+# Allow nonfree software
+echo XBPS_ALLOW_RESTRICTED=yes >> /workspace/void-packages/etc/conf
+
 for xbps_pkg in $(ls -1 /workspace/packages); do
     xbps_pkg_binary_checksum=$(cat /workspace/packages/${xbps_pkg}/checksums/${REPOSITORY_ARCH}.txt)
     # xbps_pkg_license_checksum=$(cat /workspace/packages/${xbps_pkg}/checksums/license.txt)
