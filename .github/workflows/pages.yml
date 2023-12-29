@@ -72,7 +72,7 @@ jobs:
       contents: read
       packages: read
     container:
-      image: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:x86_64
+      image: ${GHCR_IMAGE}:x86_64
     steps:
       - uses: actions/checkout@v4
         with:
