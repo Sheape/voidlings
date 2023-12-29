@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  GHCR_IMAGE: "ghcr.io/xdeb-org/voidlinux-repository@sha256:35395f1ff105bd4699dcf85de54dcb60bd3fada45b87085a54d35144bc5fb565"
+  GHCR_IMAGE: "ghcr.io/xdeb-org/voidlinux-repository:x86_64@sha256:35395f1ff105bd4699dcf85de54dcb60bd3fada45b87085a54d35144bc5fb565"
 
 jobs:
   build:
@@ -43,7 +43,7 @@ jobs:
           docker run --rm \
             -v $(pwd):/workspace \
             --platform ${{ matrix.config.platform }} \
-            ${GHCR_IMAGE}:${{ matrix.config.arch }} \
+            ${GHCR_IMAGE} \
             /workspace/scripts/create_packages.sh ${{ matrix.config.arch }} ${{ matrix.config.sha256 }}
 
           sudo chown -R $(id -u):$(id -g) void-packages/hostdir/binpkgs
@@ -56,7 +56,7 @@ jobs:
           docker run --rm \
             -v $(pwd):/workspace \
             --platform ${{ matrix.config.platform }} \
-            ${GHCR_IMAGE}:${{ matrix.config.arch }} \
+            ${GHCR_IMAGE} \
             /workspace/scripts/sign_repository.sh "repository-${{ matrix.config.arch }}" ${{ github.repository_owner }} ${{ github.event.pusher.email }}
 
       - name: Upload repository as artifacts
