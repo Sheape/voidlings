@@ -1,6 +1,8 @@
 name: GitHub Pages
 
 on:
+  schedule:
+    - cron: "0 4 * * 0"
   push:
     branches:
       - main
@@ -24,7 +26,30 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          submodules: true
+          submodules: recursive
+
+      - name: Update submodules
+        id: update
+        run: git submodule update --remote --recursive
+
+      - name: Run git status
+        id: status
+        run: echo "::set-output name=status::$(git status -s)"
+
+      - name: Add and commit files
+        run: |
+          git add .
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -m "Update submodules at $(date "+DATE: %Y-%m-%d TIME: %H:%M:%S")"
+        if: ${{ steps.status.outputs.status }}
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+        if: ${{ steps.status.outputs.status && github.event_name == 'push' }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -48,6 +73,7 @@ jobs:
 
           sudo chown -R $(id -u):$(id -g) void-packages/hostdir/binpkgs
           mv void-packages/hostdir/binpkgs/*.xbps ${repository_dir}
+          mv void-packages/hostdir/binpkgs/nonfree/*.xbps ${repository_dir}
 
       - name: Create XBPS repository
         run: |
