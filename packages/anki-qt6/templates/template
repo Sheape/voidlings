@@ -5,8 +5,8 @@ revision=1
 maintainer="Sheape <sheape@outlook.ph>"
 short_desc="Spaced repetition flashcard program - Qt 6"
 license="AGPL-3.0-or-later"
-makedepends="shared-mime-info xdg-utils bash"
-hostdepends="mpv"
+makedepends="xdg-utils shared-mime-info"
+hostdepends="mpv bash"
 build_style="meta"
 homepage="https://github.com/ankitects/anki"
 distfiles="https://github.com/ankitects/anki/releases/download/${version}/anki-${version}-linux-qt6.tar.zst"
@@ -19,4 +19,6 @@ pre_install() {
 
 do_install() {
     ./install.sh
+
+    vbin anki anki-qt6
 }
