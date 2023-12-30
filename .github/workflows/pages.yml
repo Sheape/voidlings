@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  GHCR_IMAGE: "ghcr.io/xdeb-org/voidlinux-repository:x86_64@sha256:35395f1ff105bd4699dcf85de54dcb60bd3fada45b87085a54d35144bc5fb565"
+  GHCR_IMAGE: "ghcr.io/xdeb-org/voidlinux-repository:x86_64"
 
 jobs:
   build:
