@@ -4,6 +4,11 @@ REPOSITORY_ARCH="${1}"
 
 git config --global --add safe.directory /workspace/void-packages
 
+# Change mirror
+mkdir -p /etc/xbps.d
+cp /usr/share/xbps.d/*-repository-*.conf /etc/xbps.d/
+
+
 cd /workspace/void-packages
 ln -s / masterdir
 
