@@ -8,6 +8,9 @@ on:
 env:
   REPO_OWNER: "${{ github.repository_owner }}"
   REPO_NAME: "${{ github.event.repository.name }}"
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   build:
     name: Build Voidlings
@@ -16,11 +19,10 @@ jobs:
       image: ghcr.io/void-linux/void-${{ matrix.config.libc }}-full:20250227R1
       options: --platform ${{ matrix.config.platform }} --privileged
       env:
-        PATH: "/usr/libexec/chroot-git:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/usr/local/bin:/tmp/bin"
         ARCH: "${{ matrix.config.arch }}"
         BOOTSTRAP: "${{ matrix.config.host }}"
         TEST: "${{ matrix.config.test }}"
-        HOSTREPO: /hostrepo
+        REPO_PATH: "${{ env.HOME }}/void-pkgs"
     strategy:
       fail-fast: false
       matrix:
@@ -37,69 +39,68 @@ jobs:
           useradd -G xbuilder -M builder
       - name: Clone Void-Packages and prepare
         run: |
-          mkdir ~/void-pkgs
-          cd ~/void-pkgs
+          mkdir -pv $REPO_PATH
+          cd $REPO_PATH
           git clone --depth 1 https://github.com/void-linux/void-packages.git
       - name: Clone main repo
         run: |
-          cd ~/void-pkgs
+          cd $REPO_PATH
           git clone https://github.com/${{ env.REPO_OWNER }}/${{ env.REPO_NAME }}.git
       - name: Copy and prepare for installation
         run: |
-          cd ~/void-pkgs
+          cd $REPO_PATH
           cd ${{ env.REPO_NAME }}
           mkdir -p srcpkgs/brave-bin
           cd srcpkgs/brave-bin
           pwd
           curl -O https://raw.githubusercontent.com/soanvig/brave-bin/master/template
-          cd ~/void-pkgs/${{ env.REPO_NAME }}
+          cd $REPO_PATH/${{ env.REPO_NAME }}
           cp -r srcpkgs/* ../void-packages/srcpkgs
       - name: Create hostrepo and prepare masterdir
         run: |
-          cd ~/void-pkgs/void-packages
-          ln -s "$(pwd)" /hostrepo &&
+          cd $REPO_PATH/void-packages
           chown -R builder:builder . &&
           sudo -Eu builder common/travis/set_mirror.sh &&
           sudo -Eu builder common/travis/prepare.sh &&
           common/travis/fetch-xtools.sh
       # Maintained by soanvig: soanvig/brave-bin
       - name: Build brave-bin
-        run: (sudo -Eu builder /hostrepo/xbps-src -j$(nproc) -s pkg brave-bin)
+        run: (sudo -Eu builder $REPO_PATH/void-packages/xbps-src -j$(nproc) -s pkg brave-bin)
       # Normal Builds
       - name: Build anki-qt6
-        run: (sudo -Eu builder /hostrepo/xbps-src -j$(nproc) -s pkg anki-qt6)
+        run: (sudo -Eu builder $REPO_PATH/void-packages/xbps-src -j$(nproc) -s pkg anki-qt6)
       - name: Build bat-extras
-        run: (sudo -Eu builder /hostrepo/xbps-src -j$(nproc) -s pkg bat-extras)
+        run: (sudo -Eu builder $REPO_PATH/void-packages/xbps-src -j$(nproc) -s pkg bat-extras)
       - name: Build bun-bin
-        run: (sudo -Eu builder /hostrepo/xbps-src -j$(nproc) -s pkg bun-bin)
+        run: (sudo -Eu builder $REPO_PATH/void-packages/xbps-src -j$(nproc) -s pkg bun-bin)
       # Fonts
       - name: Build font-cartograph-nonfree
-        run: (sudo -Eu builder /hostrepo/xbps-src -j$(nproc) -s pkg font-cartograph-nonfree)
+        run: (sudo -Eu builder $REPO_PATH/void-packages/xbps-src -j$(nproc) -s pkg font-cartograph-nonfree)
       - name: Build font-comfortaa
-        run: (sudo -Eu builder /hostrepo/xbps-src -j$(nproc) -s pkg font-comfortaa)
+        run: (sudo -Eu builder $REPO_PATH/void-packages/xbps-src -j$(nproc) -s pkg font-comfortaa)
       - name: Build font-lexend
-        run: (sudo -Eu builder /hostrepo/xbps-src -j$(nproc) -s pkg font-lexend)
+        run: (sudo -Eu builder $REPO_PATH/void-packages/xbps-src -j$(nproc) -s pkg font-lexend)
       - name: Build font-quicksand
-        run: (sudo -Eu builder /hostrepo/xbps-src -j$(nproc) -s pkg font-quicksand)
+        run: (sudo -Eu builder $REPO_PATH/void-packages/xbps-src -j$(nproc) -s pkg font-quicksand)
       - name: Build neovide
-        run: (sudo -Eu builder /hostrepo/xbps-src -j$(nproc) -s pkg neovide)
+        run: (sudo -Eu builder $REPO_PATH/void-packages/xbps-src -j$(nproc) -s pkg neovide)
       - name: Build qutebrowser-profile
-        run: (sudo -Eu builder /hostrepo/xbps-src -j$(nproc) -s pkg qutebrowser-profile)
+        run: (sudo -Eu builder $REPO_PATH/void-packages/xbps-src -j$(nproc) -s pkg qutebrowser-profile)
       # Maintained by void linux team (void-linux/void-packages)
       - name: Build android-studio
-        run: (sudo -Eu builder /hostrepo/xbps-src -j$(nproc) -s pkg android-studio)
+        run: (sudo -Eu builder $REPO_PATH/void-packages/xbps-src -j$(nproc) -s pkg android-studio)
       - name: Build discord
-        run: (sudo -Eu builder /hostrepo/xbps-src -j$(nproc) -s pkg discord)
+        run: (sudo -Eu builder $REPO_PATH/void-packages/xbps-src -j$(nproc) -s pkg discord)
       - name: Build msttcorefonts
-        run: (sudo -Eu builder /hostrepo/xbps-src -j$(nproc) -s pkg msttcorefonts)
+        run: (sudo -Eu builder $REPO_PATH/void-packages/xbps-src -j$(nproc) -s pkg msttcorefonts)
       - name: Build zoom
-        run: (sudo -Eu builder /hostrepo/xbps-src -j$(nproc) -s pkg zoom)
+        run: (sudo -Eu builder $REPO_PATH/void-packages/xbps-src -j$(nproc) -s pkg zoom)
       # Sometimes xbps-src builds a bunch of other junk I don't want to be liable for distributing
       - name: Copy relevant packages to new directory to be packaged
         run: |
           mkdir ~/packages
-          cp /hostdir/binpkgs/*.xbps ~/packages
-          cp /hostdir/binpkgs/nonfree/*.xbps ~/packages
+          cp $REPO_PATH/void-packages/hostdir/binpkgs/*.xbps ~/packages
+          cp $REPO_PATH/void-packages/hostdir/binpkgs/nonfree/*.xbps ~/packages
           cd ~/packages
           xbps-rindex -a *
       # Retrieve the signing key from the separate private repository
@@ -151,6 +152,6 @@ jobs:
           account_id: ${{ secrets.R2_ACCOUNT_ID }}
           r2_access_key: ${{ secrets.R2_ACCESS_KEY_ID }}
           r2_secret_key: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-          r2_bucket: $R2_BUCKET
+          r2_bucket: ${{ vars.R2_BUCKET }}
           source_dir: ./
           destination_dir: ./
