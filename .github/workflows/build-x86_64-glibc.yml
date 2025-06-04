@@ -87,8 +87,8 @@ jobs:
       - name: Build qutebrowser-profile
         run: (sudo -Eu builder $REPO_PATH/void-packages/xbps-src -j$(nproc) -s pkg qutebrowser-profile)
       # Maintained by void linux team (void-linux/void-packages)
-      - name: Build android-studio
-        run: (sudo -Eu builder $REPO_PATH/void-packages/xbps-src -j$(nproc) -s pkg android-studio)
+      # - name: Build android-studio
+      #   run: (sudo -Eu builder $REPO_PATH/void-packages/xbps-src -j$(nproc) -s pkg android-studio)
       - name: Build discord
         run: (sudo -Eu builder $REPO_PATH/void-packages/xbps-src -j$(nproc) -s pkg discord)
       - name: Build msttcorefonts
