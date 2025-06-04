@@ -1,6 +1,6 @@
 # Template file for 'bun'
 pkgname=bun-bin
-version=1.2.8
+version=1.2.15
 revision=1
 build_style="meta"
 archs="aarch64 x86_64"
@@ -10,7 +10,7 @@ license="MIT"
 homepage="https://bun.sh"
 changelog="https://bun.sh/blog"
 distfiles="https://github.com/oven-sh/bun/releases/download/bun-v${version}/bun-linux-x64.zip"
-checksum=42b48b366760b986fe1d6a8b13c5706d26730839a8577790cd2e8f28799e9f31
+checksum=a261626367835bb3754a01ae07f884484ed17b0886b01e417b799591fa4d7901
 nopie=yes
 
 do_install() {
