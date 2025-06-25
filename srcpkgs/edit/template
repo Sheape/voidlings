@@ -1,0 +1,21 @@
+# Template file for 'edit'
+pkgname=edit
+version=1.2.0
+revision=1
+archs="aarch64 x86_64"
+#build_wrksrc=
+build_style=cargo
+configure_args="--config .cargo/release.toml"
+#make_build_args=""
+#make_install_args=""
+#conf_files=""
+#make_dirs="/var/log/dir 0755 root root"
+hostmakedepends=""
+makedepends=""
+depends="icu-libs"
+short_desc="A simple editor for simple needs."
+maintainer="Sheape <sheape@outlook.ph>"
+license="MIT"
+homepage="https://github.com/microsoft/edit"
+distfiles="${homepage}/archive/refs/tags/v${version}.tar.gz"
+checksum=e4ba6ff1bfecfeff2492306f5850c714bf50ffdb3cc3bb5be3aa987289f240fe
