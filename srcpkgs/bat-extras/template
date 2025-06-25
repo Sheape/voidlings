@@ -2,6 +2,7 @@
 pkgname=bat-extras
 version=2023.09.19
 revision=1
+metapackage="yes"
 maintainer="Sheape <sheape@outlook.ph>"
 short_desc="Bash scripts that integrate bat with various command line tools."
 license="MIT"
