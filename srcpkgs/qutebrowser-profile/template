@@ -3,7 +3,6 @@ pkgname=qutebrowser-profile
 version=2021.01.08
 _githash=6b7784a81c988b1b118e8ab7512f8f9a05cc13f2
 revision=1
-metapackage="yes"
 maintainer="Sheape <sheape@outlook.ph>"
 short_desc="A simple wrapper script for qutebrowser that allows you to maintain
 different profiles"
