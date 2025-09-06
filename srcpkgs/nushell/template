@@ -1,0 +1,22 @@
+# Template file for 'nushell'
+pkgname=nushell
+version=0.106.1
+revision=1
+build_style=cargo
+configure_args="--no-default-features --features=plugin,trash-support,sqlite,native-tls"
+hostmakedepends="pkg-config"
+makedepends="openssl-devel sqlite-devel"
+short_desc="Modern shell for the GitHub era"
+maintainer="Saksham <voidisnull@duck.com>"
+license="MIT"
+homepage="https://www.nushell.sh/"
+changelog="https://www.nushell.sh/blog/"
+distfiles="https://github.com/nushell/nushell/archive/refs/tags/${version}.tar.gz"
+checksum=3e24044c354d050a850b69dc77c99cc503542c3d9d75fed0aef1c12fefdf380b
+register_shell="/usr/bin/nu"
+# all tests fail with argument --target
+make_check=no
+
+post_install() {
+	vlicense LICENSE
+}
