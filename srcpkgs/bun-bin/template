@@ -1,6 +1,6 @@
 # Template file for 'bun'
 pkgname=bun-bin
-version=1.2.15
+version=1.2.22
 revision=1
 archs="aarch64 x86_64"
 short_desc="JavaScript runtime, bundler, transpiler, and package manager"
@@ -9,7 +9,7 @@ license="MIT"
 homepage="https://bun.sh"
 changelog="https://bun.sh/blog"
 distfiles="https://github.com/oven-sh/bun/releases/download/bun-v${version}/bun-linux-x64.zip"
-checksum=a261626367835bb3754a01ae07f884484ed17b0886b01e417b799591fa4d7901
+checksum=4c446af1a01d7b40e1e11baebc352f9b2bfd12887e51b97dd3b59879cee2743a
 nopie=yes
 
 do_install() {
