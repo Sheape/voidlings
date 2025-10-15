@@ -64,8 +64,8 @@ jobs:
           sudo -Eu builder common/travis/prepare.sh &&
           common/travis/fetch-xtools.sh
       # Maintained by soanvig: soanvig/brave-bin
-      - name: Build brave-bin
-        run: (sudo -Eu builder $REPO_PATH/void-packages/xbps-src -j$(nproc) -s pkg brave-bin)
+      # - name: Build brave-bin
+      #   run: (sudo -Eu builder $REPO_PATH/void-packages/xbps-src -j$(nproc) -s pkg brave-bin)
       # Normal Builds
       - name: Build anki-qt6
         run: (sudo -Eu builder $REPO_PATH/void-packages/xbps-src -j$(nproc) -s pkg anki-qt6)
