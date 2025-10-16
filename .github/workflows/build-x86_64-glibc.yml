@@ -64,8 +64,8 @@ jobs:
           sudo -Eu builder common/travis/prepare.sh &&
           common/travis/fetch-xtools.sh
       # Maintained by soanvig: soanvig/brave-bin
-      # - name: Build brave-bin
-      #   run: (sudo -Eu builder $REPO_PATH/void-packages/xbps-src -j$(nproc) -s pkg brave-bin)
+      - name: Build brave-bin
+        run: (sudo -Eu builder $REPO_PATH/void-packages/xbps-src -j$(nproc) -s pkg brave-bin)
       # Normal Builds
       - name: Build anki-qt6
         run: (sudo -Eu builder $REPO_PATH/void-packages/xbps-src -j$(nproc) -s pkg anki-qt6)
@@ -87,8 +87,8 @@ jobs:
       #   run: (sudo -Eu builder $REPO_PATH/void-packages/xbps-src -j$(nproc) -s pkg edit)
       # - name: Build neovide
       #   run: (sudo -Eu builder $REPO_PATH/void-packages/xbps-src -j$(nproc) -s pkg neovide)
-      - name: Build nushell
-        run: (sudo -Eu builder $REPO_PATH/void-packages/xbps-src -j$(nproc) -s pkg nushell)
+      # - name: Build nushell
+      #   run: (sudo -Eu builder $REPO_PATH/void-packages/xbps-src -j$(nproc) -s pkg nushell)
       - name: Build qutebrowser-profile
         run: (sudo -Eu builder $REPO_PATH/void-packages/xbps-src -j$(nproc) -s pkg qutebrowser-profile)
       # Maintained by void linux team (void-linux/void-packages)
