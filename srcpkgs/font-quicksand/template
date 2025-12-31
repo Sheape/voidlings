@@ -3,7 +3,7 @@ pkgname=font-quicksand
 version=2.0
 revision=1
 _githash=6dbe1c07a99d0b63b730265f2ea75e10113e9a04
-maintainer="Sheape <sheape@outlook.ph>"
+maintainer="Sheape <paulpare@protonmail.com>"
 short_desc="Quicksand is a sans serif typeface designed by Andrew Paglinawan in
 2008 using geometric shapes as it's core foundation."
 license="OFL-1.1"

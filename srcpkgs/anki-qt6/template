@@ -2,7 +2,7 @@
 pkgname=anki-qt6
 version=23.12
 revision=1
-maintainer="Sheape <sheape@outlook.ph>"
+maintainer="Sheape <paulpare@protonmail.com>"
 short_desc="Spaced repetition flashcard program - Qt 6"
 license="AGPL-3.0-or-later"
 makedepends="xdg-utils shared-mime-info"
